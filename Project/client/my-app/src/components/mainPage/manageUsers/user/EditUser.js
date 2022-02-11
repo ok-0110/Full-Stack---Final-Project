@@ -1,12 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate,useParams } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function EditUser() {
   const navigate = useNavigate();
-const {userid} = useParams()
- 
+  const { userid } = useParams();
 
   const [userFromDB, setUserFromDB] = useState({});
   const [employeeFromJson, setEmployeeFromJson] = useState({});
@@ -15,7 +13,7 @@ const {userid} = useParams()
   //   setUserFromDB(
   // setEmployeeFromJson(
   // setPremssionsFromJson(
-  const setingUser = async () => {
+  const settingUser = async () => {
     const { data: usersFromAxios } = await axios.get(
       `http://localhost:7070/company/users/${userid}`
     );
@@ -25,15 +23,26 @@ const {userid} = useParams()
     const { data: permissionsFromAxios } = await axios.get(
       `http://localhost:7070/company/permissions/${userid}`
     );
-    console.log(permissionsFromAxios);
 
     setUserFromDB({ ...usersFromAxios });
     setEmployeeFromJson({ ...employeeFromAxios });
     setPremssionsFromJson({ ...permissionsFromAxios });
   };
 
+  useEffect(() => {
+    settingUser();
+  }, []);
+
+  const [newUserPermissions, setNewUserPermissions] = useState([
+    false /*"View Subscriptions" */,
+    false /*Create Subscriptions */,
+    false /*Delete Subscriptions */,
+    false /*View Movies */,
+    false /*Create Movies */,
+    false /*Delete Movies */,
+  ]);
+
   const handelPermi = () => {
-    console.log(premssionsFromJson);
     const arrOfOldPermissions = [false, false, false, false, false, false];
     for (let i = 0; i <= premssionsFromJson.permissions.length; i++) {
       if (premssionsFromJson.permissions[i] === "View Subscriptions") {
@@ -50,43 +59,33 @@ const {userid} = useParams()
         arrOfOldPermissions[5] = true;
       }
     }
+    setNewUserPermissions([...arrOfOldPermissions]);
+    setNewUserInfo({
+      firstName: employeeFromJson.firstName,
+      lastName: employeeFromJson.lastName,
+      userName: employeeFromJson.userName,
+      createdDate: employeeFromJson.createdDate,
+      SessionTimeOut: employeeFromJson.SessionTimeOut,
+    })
 
-    console.log(arrOfOldPermissions);
-
-    // console.log("user");
-    // console.log(userFromDB);
-    // console.log("emplo");
-    // console.log(employeeFromJson);
-    // console.log("per");
-    // console.log(premssionsFromJson);
+    
   };
 
-  useEffect(() => {
-    setingUser();
-  }, []);
+ 
 
   useEffect(() => {
     handelPermi();
   }, [premssionsFromJson]);
 
   const [coretTime, setCoretTime] = useState([]);
-
+ 
   const [newUserInfo, setNewUserInfo] = useState({
-    firstName: employeeFromJson.firstName,
-    lastName: employeeFromJson.lastName,
-    userName: employeeFromJson.userName,
-    createdDate: employeeFromJson.createdDate,
-    SessionTimeOut: employeeFromJson.SessionTimeOut,
+    firstName: "",
+    lastName: "",
+    userName: "",
+    createdDate: "",
+    SessionTimeOut: 0,
   });
-
-  const [newUserPermissions, setNewUserPermissions] = useState([
-    false /*"View Subscriptions" */,
-    false /*Create Subscriptions */,
-    false /*Delete Subscriptions */,
-    false /*View Movies */,
-    false /*Create Movies */,
-    false /*Delete Movies */,
-  ]);
 
   const setUserInfo = (e) => {
     let user = { ...newUserInfo };
@@ -104,28 +103,29 @@ const {userid} = useParams()
       UserName: newUserInfo.userName,
       Password: `1234`,
     };
-    const { data: userResponsFromDB } = await axios.post(
-      `http://localhost:7070/company/users`,
+    console.log(newUser);
+     await axios.put(
+      `http://localhost:7070/company/users/${userFromDB._id}`,
       newUser
     );
     //get id tnd sand to employee.json
     newUser = { ...newUserInfo };
-    // newUser.userName = "userName exist";
-    newUser.userId = userResponsFromDB._id;
-
-    await axios.post(`http://localhost:7070/company/employee`, newUser);
+    newUser.userId = userFromDB._id;
+    await axios.put(`http://localhost:7070/company/employee/${userFromDB._id}`, newUser);
 
     //get id tnd sand to permisions.json
     const arrOfPermisions = checkboxsToArrOfString();
-    const userPermi = { userId: userResponsFromDB._id, permissions: arrOfPermisions };
-    await axios.post(`http://localhost:7070/company/permissions`, userPermi);
-
+    const userPermi = { userId: userFromDB._id, permissions: arrOfPermisions };
+    await axios.put(`http://localhost:7070/company/permissions/${userFromDB._id}`, userPermi);
+    console.log(userPermi);
     //back to all users
     alert("user added");
 
     navigate("/manageusers/allusers");
   };
   //==================== end of submit
+  
+  
   const cancel = () => {
     navigate("/manageusers/allusers");
   };
@@ -161,19 +161,19 @@ const {userid} = useParams()
     });
     return arrOfPermisions;
   };
-
+  
   //========================================return
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
       <span>Edit user</span>
       <br />
-
+      {/* arrOfOldPermissions */}
       <form>
         <label htmlFor="View Subscriptions">View Subscriptions:</label>{" "}
         <input
           type={"checkbox"}
-          onClick={hendelCheckbox}
-          defaultChecked={true}
+          onChange={hendelCheckbox}
+          checked={newUserPermissions[0]}
           className="0"
           name="View Subscriptions"
         />
@@ -181,7 +181,8 @@ const {userid} = useParams()
         <label htmlFor="Create Subscriptions">Create Subscriptions:</label>{" "}
         <input
           type={"checkbox"}
-          onClick={hendelCheckbox}
+          onChange={hendelCheckbox}
+          checked={newUserPermissions[1]}
           className="1"
           name="Create Subscriptions"
         />
@@ -189,19 +190,38 @@ const {userid} = useParams()
         <label htmlFor="Delete Subscriptions">Delete Subscriptions:</label>{" "}
         <input
           type={"checkbox"}
-          onClick={hendelCheckbox}
+          onChange={hendelCheckbox}
+          checked={newUserPermissions[2]}
           className="2"
           name="Delete Subscriptions"
         />
         <br />
         <label htmlFor="View Movies">View Movies:</label>{" "}
-        <input type={"checkbox"} onClick={hendelCheckbox} className="3" name="View Movies" />
+        <input
+          type={"checkbox"}
+          onChange={hendelCheckbox}
+          checked={newUserPermissions[3]}
+          className="3"
+          name="View Movies"
+        />
         <br />
         <label htmlFor="Create Movies">Create Movies:</label>{" "}
-        <input type={"checkbox"} onClick={hendelCheckbox} className="4" name="Create Movies" />
+        <input
+          type={"checkbox"}
+          onChange={hendelCheckbox}
+          checked={newUserPermissions[4]}
+          className="4"
+          name="Create Movies"
+        />
         <br />
         <label htmlFor="Delete Movies">Delete Movies:</label>{" "}
-        <input type={"checkbox"} onClick={hendelCheckbox} className="5" name="Delete Movies" />
+        <input
+          type={"checkbox"}
+          onChange={hendelCheckbox}
+          checked={newUserPermissions[5]}
+          className="5"
+          name="Delete Movies"
+        />
         <br />
         {/*  */}
         <label htmlFor="First Name">First Name: </label>
@@ -249,7 +269,7 @@ const {userid} = useParams()
         <br />
         {/*  */}
         <label htmlFor="submit"></label>
-        <input type={"submit"} value="Add" onClick={submit} name="submit" />
+        <input type={"submit"} value="Update" onClick={submit} name="submit" />
         &nbsp; &nbsp;
         <label htmlFor="cancel"></label>
         <input type={"button"} value="Cancel" onClick={cancel} name="cancel" />
