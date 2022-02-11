@@ -53,7 +53,7 @@ const admin = async () => {
 
     const findAdmin = allUsers.find((el) => el.UserName === "admin");
     const adminToPremission = {
-      empliyeeId: findAdmin._id,
+      userId: findAdmin._id,
       permissions: ["Admin",
         "View Subscriptions",
         "Create Subscriptions",
