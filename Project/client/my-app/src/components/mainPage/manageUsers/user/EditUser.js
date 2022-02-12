@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function EditUser() {
@@ -66,19 +66,13 @@ export default function EditUser() {
       userName: employeeFromJson.userName,
       createdDate: employeeFromJson.createdDate,
       SessionTimeOut: employeeFromJson.SessionTimeOut,
-    })
-
-    
+    });
   };
-
- 
 
   useEffect(() => {
     handelPermi();
   }, [premssionsFromJson]);
 
-  const [coretTime, setCoretTime] = useState([]);
- 
   const [newUserInfo, setNewUserInfo] = useState({
     firstName: "",
     lastName: "",
@@ -104,10 +98,7 @@ export default function EditUser() {
       Password: `1234`,
     };
     console.log(newUser);
-     await axios.put(
-      `http://localhost:7070/company/users/${userFromDB._id}`,
-      newUser
-    );
+    await axios.put(`http://localhost:7070/company/users/${userFromDB._id}`, newUser);
     //get id tnd sand to employee.json
     newUser = { ...newUserInfo };
     newUser.userId = userFromDB._id;
@@ -124,8 +115,7 @@ export default function EditUser() {
     navigate("/manageusers/allusers");
   };
   //==================== end of submit
-  
-  
+
   const cancel = () => {
     navigate("/manageusers/allusers");
   };
@@ -161,7 +151,7 @@ export default function EditUser() {
     });
     return arrOfPermisions;
   };
-  
+
   //========================================return
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
@@ -264,7 +254,6 @@ export default function EditUser() {
           onChange={setUserInfo}
           name="SessionTimeOut"
           min={0}
-          defaultValue={60}
         />
         <br />
         {/*  */}
