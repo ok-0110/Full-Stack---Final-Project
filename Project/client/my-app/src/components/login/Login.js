@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import MainContext from "../MainContext";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const {
     change: [anyChange, setAnyChange],
   } = useContext(MainContext);
@@ -18,7 +20,7 @@ export default function Login() {
 
   const verifyUser = async () => {
     const { data: allUsers } = await axios.get("http://localhost:7070/company/users");
-    console.log(allUsers);
+    // console.log(allUsers);
     const user = allUsers.find((el) => el.UserName === loggdUser.userName);
     if (user === undefined) {
       alert("user-name not match :(");
@@ -32,23 +34,30 @@ export default function Login() {
   };
 
   const login = async (userObj) => {
-    const { data: userPremission } = await axios.get(
+    if (loggdUser.password !== "1234") {
+     const { data: userPremission } = await axios.get(
       `http://localhost:7070/company/permissions/${userObj._id}`
     );
     sessionStorage.setItem("permissions", JSON.stringify(userPremission.permissions));
     sessionStorage.setItem("isLogged", JSON.stringify(true));
-    if (userPremission.permissions.find((el) => el === "Admin")) { 
+    if (userPremission.permissions.find((el) => el === "Admin")) {
       sessionStorage.setItem("isAdmin", JSON.stringify(true));
       sessionStorage.setItem("name", JSON.stringify("admin"));
-    }else{
+    } else {
       sessionStorage.setItem("isAdmin", JSON.stringify(false));
-      sessionStorage.setItem("name", JSON.stringify("employee"));
-
+      const { data: useremployee } = await axios.get(
+        `http://localhost:7070/company/employee/${userObj._id}`
+      );
+      sessionStorage.setItem("name", JSON.stringify(`${useremployee.firstName}`));
 
       //logic to add name and id to session from employee
-
     }
-    setAnyChange(!anyChange);
+    setAnyChange(!anyChange); 
+    }
+    else {
+      alert("is first time for you");
+      navigate("/newuser");
+    }
   };
 
   return (

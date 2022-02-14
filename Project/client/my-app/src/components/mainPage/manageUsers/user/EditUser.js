@@ -97,7 +97,7 @@ export default function EditUser() {
       UserName: newUserInfo.userName,
       Password: `1234`,
     };
-    console.log(newUser);
+
     await axios.put(`http://localhost:7070/company/users/${userFromDB._id}`, newUser);
     //get id tnd sand to employee.json
     newUser = { ...newUserInfo };
@@ -108,7 +108,7 @@ export default function EditUser() {
     const arrOfPermisions = checkboxsToArrOfString();
     const userPermi = { userId: userFromDB._id, permissions: arrOfPermisions };
     await axios.put(`http://localhost:7070/company/permissions/${userFromDB._id}`, userPermi);
-    console.log(userPermi);
+
     //back to all users
     alert("user added");
 

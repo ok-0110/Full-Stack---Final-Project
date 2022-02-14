@@ -88,13 +88,10 @@ router.route("/addShow/:memberId/:showId/:date").put(async (request, response) =
     const showId = request.params.showId;
     const date = request.params.date;
 
-     
-
     const sub = await subBL.addShowToSub(memberId, showId, date);
     return response.json(sub);
   } catch (error) {
-    console.log("00");
-    return response.status(404).json('I dont have that');
+    return response.status(404).json("I dont have that");
   }
 });
 

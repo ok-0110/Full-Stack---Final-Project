@@ -57,8 +57,10 @@ const addShowToSub = async (memberId, showId, date) => {
 //romove show and time from subscriber
 const removeShowFromSub = async (memberId, showId) => {
   const subscriber = await getSubBymemberId(memberId);
+
   if (subscriber !== undefined) {
-    const showIndex = subscriber.Shows.findIndex((el) => el.showId === showId);
+    console.log(subscriber);
+    const showIndex = subscriber.Shows.findIndex((el) => el.showId == showId);
     if (showIndex === -1) {
       return "removeShowFromSub faild - not exist movies or not a match ";
     } else {
@@ -75,7 +77,7 @@ const changeDateToSub = async (memberId, showId, date) => {
   const subscriber = await getSubBymemberId(memberId);
 
   if (subscriber !== undefined) {
-    const showIndex = subscriber.Shows.findIndex((el) => el.showId === showId);
+    const showIndex = subscriber.Shows.findIndex((el) => el.showId == showId);
     if (showIndex === -1) {
       return "removeShowFromSub faild - not exist movies or not a match ";
     } else {

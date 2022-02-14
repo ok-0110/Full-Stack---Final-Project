@@ -37,8 +37,7 @@ export default function ManageUsers() {
         <br/>
     
       <Routes>
-        {/* <Route path="/manageusers" element={<AllUsers />} /> */}
-        {/* <Route path="*" element={<AllUsers />} /> */}
+        <Route path="*" element={<AllUsers />} />
         <Route path="/allusers" element={<AllUsers />} />
         <Route path="/adduser" element={<AddUser />} />
         <Route path="/editUser/:userid" element={<EditUser />} />

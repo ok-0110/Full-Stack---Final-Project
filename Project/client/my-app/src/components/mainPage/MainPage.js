@@ -3,7 +3,8 @@ import MainContext from "../MainContext";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import ManageUsers from "./manageUsers/ManageUsers";
 import Shows from "./shows/Shows";
-import Subscriptions from "./subscriptions/Subscriptions";
+import Members from "./Subscribers/Members";
+
 
 export default function MainPage() {
   const {
@@ -38,7 +39,7 @@ export default function MainPage() {
         Shows
       </button>
       &nbsp;
-      <button onClick={navigateTo} name="subscriptions">
+      <button onClick={navigateTo} name="Subscribers">
         Subscriptions
       </button>
       &nbsp;
@@ -53,7 +54,7 @@ export default function MainPage() {
         </button>
       ) : null}
       {permissions.find((el) => el === "View Subscriptions") ? (
-        <button onClick={navigateTo} name="subscriptions">
+        <button onClick={navigateTo} name="Subscribers">
           Subscriptions
         </button>
       ) : null}
@@ -63,14 +64,14 @@ export default function MainPage() {
   //=============================================start of return
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
-      <h3>{`hello ${nameOfUser},Welcome back`}</h3>
+      <h3>{`hello ${nameOfUser}, Welcome back`}</h3>
       {isAdmin ? adminButtons : employeeButtons}
       <Routes>
         <Route path="*" element={null} />
         {/* <Route path="/" element={null} /> */}
         <Route path="/manageusers/*" element={<ManageUsers />} />
-        <Route path="/shows" element={<Shows />} />
-        <Route path="/subscriptions" element={<Subscriptions />} />
+        <Route path="/shows/*" element={<Shows />} />
+        <Route path="/Subscribers/*" element={<Members/>} />
       </Routes>
       <br /> <span>main footer</span>
     </div>
