@@ -1,8 +1,50 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import validator from "validator";
 
 export default function AddUser() {
+  const [firstName, setFirstNameValid] = useState(false);
+  const [lastName, setLastNameValid] = useState(false);
+  const [userName, setUserNameValid] = useState(false);
+
+  const setUserInfo = (e) => {
+    let isValid = true;
+    switch (e.target.name) {
+      case "firstName":
+        isValid = validator.isAlpha(e.target.value, "en-US", {
+          ignore: " -",
+        });
+        if (isValid) {
+          isValid = validator.isByteLength(e.target.value,{min:2, max: 10})
+        }
+        setFirstNameValid(e.target.value === "" ? true : isValid);
+        break;
+
+      case "lastName":
+        isValid = validator.isAlpha(e.target.value, "en-US", {
+          ignore: " -",
+        });
+        if (isValid) {
+          isValid = validator.isByteLength(e.target.value,{min:2, max: 10})
+        }
+        setLastNameValid(e.target.value === "" ? true : isValid);
+        break;
+      case "userName":
+        isValid = validator.isAlphanumeric(e.target.value);
+        setUserNameValid(e.target.value === "" ? true : isValid);
+        break;
+
+      default:
+        break;
+    }
+    if (isValid) {
+      let user = { ...newUserInfo };
+      user[e.target.name] = e.target.value;
+      setNewUserInfo({ ...user });
+    }
+  };
+
   const navigate = useNavigate();
   const [coretTime, setCoretTime] = useState([]);
   const [newUserInfo, setNewUserInfo] = useState({
@@ -21,12 +63,6 @@ export default function AddUser() {
     false /*Delete Movies */,
   ]);
 
-  const setUserInfo = (e) => {
-    let user = { ...newUserInfo };
-    user[e.target.name] = e.target.value;
-    setNewUserInfo({ ...user });
-  };
-
   const getTime = () => {
     let todayDate = new Date().toISOString().slice(0, 10);
     setCoretTime(todayDate);
@@ -34,33 +70,34 @@ export default function AddUser() {
 
   const submit = async (e) => {
     e.preventDefault();
+    if (firstName && lastName && userName) {
+      //sand to db
+      //Password: `${newUserInfo.lastName}1234`
+      let newUser = {
+        UserName: newUserInfo.userName,
+        Password: `1234`,
+      };
+      const { data: userResponsFromDB } = await axios.post(
+        `http://localhost:7070/company/users`,
+        newUser
+      );
+      //get id tnd sand to employee.json
+      newUser = { ...newUserInfo };
+      // newUser.userName = "userName exist";
+      newUser.userId = userResponsFromDB._id;
 
-    //sand to db
-    //Password: `${newUserInfo.lastName}1234`
-    let newUser = {
-      UserName: newUserInfo.userName,
-      Password: `1234`,
-    };
-    const { data: userResponsFromDB } = await axios.post(
-      `http://localhost:7070/company/users`,
-      newUser
-    );
-    //get id tnd sand to employee.json
-    newUser = { ...newUserInfo };
-    // newUser.userName = "userName exist";
-    newUser.userId = userResponsFromDB._id;
+      await axios.post(`http://localhost:7070/company/employee`, newUser);
 
-    await axios.post(`http://localhost:7070/company/employee`, newUser);
+      //get id tnd sand to permisions.json
+      const arrOfPermisions = checkboxsToArrOfString();
+      const userPermi = { userId: userResponsFromDB._id, permissions: arrOfPermisions };
+      await axios.post(`http://localhost:7070/company/permissions`, userPermi);
 
-    //get id tnd sand to permisions.json
-    const arrOfPermisions = checkboxsToArrOfString();
-    const userPermi = { userId: userResponsFromDB._id, permissions: arrOfPermisions };
-    await axios.post(`http://localhost:7070/company/permissions`, userPermi);
+      //back to all users
+      alert("user added");
 
-    //back to all users
-    alert("user added");
-  
-    navigate("/manageusers/allusers")
+      navigate("/manageusers/allusers");
+    }
   };
 
   const cancel = () => {
@@ -142,12 +179,15 @@ export default function AddUser() {
         <label htmlFor="First Name">First Name: </label>
         <input type={"text"} onChange={setUserInfo} name="firstName" />
         <br />
+        {firstName ? null : <span>firstName is invalid use only A-Z , a-z , Between 2-10 letters  </span>} <br />
         <label htmlFor="Last Name">Last Name: </label>
         <input type={"text"} onChange={setUserInfo} name="lastName" />
         <br />
+        {lastName ? null : <span>lastName is invalid use only A-Z , a-z , Between 2-10 letters   </span>} <br />
         <label htmlFor="User Name">User Name: </label>
         <input type={"text"} onChange={setUserInfo} name="userName" />
         <br />
+        {userName ? null : <span>userName is invalid use only A-Z , a-z , 1-9</span>} <br />
         <label htmlFor="Created date"> Created date: </label>
         <input type={"date"} onChange={setUserInfo} name="createdDate" defaultValue={coretTime} />
         <br />

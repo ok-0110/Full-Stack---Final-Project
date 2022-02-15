@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import validator from "validator";
 
 export default function EditUser() {
   const navigate = useNavigate();
@@ -80,39 +81,74 @@ export default function EditUser() {
     createdDate: "",
     SessionTimeOut: 0,
   });
+  const [firstName, setFirstNameValid] = useState(true);
+  const [lastName, setLastNameValid] = useState(true);
+  const [userName, setUserNameValid] = useState(true);
 
   const setUserInfo = (e) => {
-    let user = { ...newUserInfo };
-    user[e.target.name] = e.target.value;
-    setNewUserInfo({ ...user });
+    let isValid = true;
+    switch (e.target.name) {
+      case "firstName":
+        isValid = validator.isAlpha(e.target.value, "en-US", {
+          ignore: " -",
+        });
+        if (isValid) {
+          isValid = validator.isByteLength(e.target.value, { min: 2, max: 10 });
+        }
+        setFirstNameValid(e.target.value === "" ? true : isValid);
+        break;
+
+      case "lastName":
+        isValid = validator.isAlpha(e.target.value, "en-US", {
+          ignore: " -",
+        });
+        if (isValid) {
+          isValid = validator.isByteLength(e.target.value, { min: 2, max: 10 });
+        }
+        setLastNameValid(e.target.value === "" ? true : isValid);
+        break;
+      case "userName":
+        isValid = validator.isAlphanumeric(e.target.value);
+        setUserNameValid(e.target.value === "" ? true : isValid);
+        break;
+
+      default:
+        break;
+    }
+    if (isValid) {
+      let user = { ...newUserInfo };
+      user[e.target.name] = e.target.value;
+      setNewUserInfo({ ...user });
+    }
   };
 
   //=================================submit
   const submit = async (e) => {
     e.preventDefault();
+    if (firstName && lastName && userName) {
+      //sand to db
+      //Password: `${newUserInfo.lastName}1234`
+      let newUser = {
+        UserName: newUserInfo.userName,
+        Password: `1234`,
+      };
 
-    //sand to db
-    //Password: `${newUserInfo.lastName}1234`
-    let newUser = {
-      UserName: newUserInfo.userName,
-      Password: `1234`,
-    };
+      await axios.put(`http://localhost:7070/company/users/${userFromDB._id}`, newUser);
+      //get id tnd sand to employee.json
+      newUser = { ...newUserInfo };
+      newUser.userId = userFromDB._id;
+      await axios.put(`http://localhost:7070/company/employee/${userFromDB._id}`, newUser);
 
-    await axios.put(`http://localhost:7070/company/users/${userFromDB._id}`, newUser);
-    //get id tnd sand to employee.json
-    newUser = { ...newUserInfo };
-    newUser.userId = userFromDB._id;
-    await axios.put(`http://localhost:7070/company/employee/${userFromDB._id}`, newUser);
+      //get id tnd sand to permisions.json
+      const arrOfPermisions = checkboxsToArrOfString();
+      const userPermi = { userId: userFromDB._id, permissions: arrOfPermisions };
+      await axios.put(`http://localhost:7070/company/permissions/${userFromDB._id}`, userPermi);
 
-    //get id tnd sand to permisions.json
-    const arrOfPermisions = checkboxsToArrOfString();
-    const userPermi = { userId: userFromDB._id, permissions: arrOfPermisions };
-    await axios.put(`http://localhost:7070/company/permissions/${userFromDB._id}`, userPermi);
+      //back to all users
+      alert("user updated");
 
-    //back to all users
-    alert("user added");
-
-    navigate("/manageusers/allusers");
+      navigate("/manageusers/allusers");
+    }
   };
   //==================== end of submit
 
@@ -220,24 +256,27 @@ export default function EditUser() {
           defaultValue={employeeFromJson.firstName}
           onChange={setUserInfo}
           name="firstName"
-        />
+        />{" "}
         <br />
+        {firstName ? null : <span>name is invalid use only A-Z , a-z </span>} <br />
         <label htmlFor="Last Name">Last Name: </label>
         <input
           type={"text"}
           defaultValue={employeeFromJson.lastName}
           onChange={setUserInfo}
           name="lastName"
-        />
+        />{" "}
         <br />
+        {lastName ? null : <span>name is invalid use only A-Z , a-z </span>} <br />
         <label htmlFor="User Name">User Name: </label>
         <input
           type={"text"}
           defaultValue={employeeFromJson.userName}
           onChange={setUserInfo}
           name="userName"
-        />
+        />{" "}
         <br />
+        {userName ? null : <span>name is invalid use only A-Z , a-z , 1-9</span>} <br />
         <label htmlFor="Created date"> Created date: </label>
         <input
           type={"date"}

@@ -1,10 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import validator from "validator";
 
 export default function AddMember() {
-
   const navigate = useNavigate();
+
+  const [nameValid, setNameValid] = useState(false);
+  const [emailValid, setEmailValid] = useState(false);
+  const [cityValid, setCityValid] = useState(false);
 
   const [newMemberInfo, setNewMemberInfo] = useState({
     Name: "",
@@ -13,6 +17,40 @@ export default function AddMember() {
   });
 
   const setMemberInfo = (e) => {
+    let isValid = true;
+    switch (e.target.name) {
+      case "Name":
+        isValid = validator.isAlpha(e.target.value, "en-US", {
+          ignore: " -",
+        });
+        if (isValid) {
+          isValid = validator.isByteLength(e.target.value, { min: 2, max: 10 });
+        }
+        setNameValid(isValid);
+        break;
+
+      case "Email": //================
+        isValid = validator.isEmail(e.target.value);
+        if (isValid) {
+          isValid = validator.isByteLength(e.target.value, { min: 2, max: undefined });
+        }
+        setEmailValid(isValid);
+        break;
+      case "City":
+        isValid = validator.isAlpha(e.target.value, "en-US", {
+          ignore: " -",
+        });
+        if (isValid) {
+          isValid = validator.isByteLength(e.target.value, { min: 2, max: 10 });
+        }
+        setCityValid(isValid);
+        break;
+
+      default:
+        break;
+    }
+    if (isValid) {
+    }
     let member = { ...newMemberInfo };
     member[e.target.name] = e.target.value;
     setNewMemberInfo({ ...member });
@@ -23,25 +61,33 @@ export default function AddMember() {
   };
 
   const submit = async (e) => {
-    //sand member to DB and sub to DB
-    await axios.post(`http://localhost:8080/subscriptions/members`, newMemberInfo);
-    
-    //back to all member
-    alert("member updated");
-    navigate("/Subscribers/allmembers");
+    if (nameValid && emailValid && cityValid) {
+      //sand member to DB and sub to DB
+      await axios.post(`http://localhost:8080/subscriptions/members`, newMemberInfo);
+
+      //back to all member
+      alert("member updated");
+      navigate("/Subscribers/allmembers");
+    }
   };
 
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
-      <span>Edit Member </span> <br/>
+      <span>Edit Member </span> <br />
       <label htmlFor="member Name">member Name: </label>
       <input type={"text"} onChange={setMemberInfo} name="Name" />
+      <br />
+      {nameValid ? null : <span>name is invalid use only A-Z , a-z and Min of 2 letters and max of 10</span>}
       <br />
       <label htmlFor="Email">Email: </label>
       <input type={"text"} onChange={setMemberInfo} name="Email" />
       <br />
+      {emailValid ? null : <span>email is invalid use "normal" email and Min of 2 letters</span>}
+      <br />
       <label htmlFor="City">City: </label>
       <input type={"text"} onChange={setMemberInfo} name="City" />
+      <br />
+      {cityValid ? null : <span>name is invalid use only A-Z , a-z and Min of 2 letters and max of 10</span>}
       <br />
       <label htmlFor="submit"></label>
       <input type={"submit"} value="Add" onClick={submit} name="submit" />

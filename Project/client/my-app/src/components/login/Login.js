@@ -16,15 +16,17 @@ export default function Login() {
   const [loggdUser, setLoggdUser] = useState({ userName: "", password: "" });
 
   const setUser = (e) => {
-    let isValid = false;
+    let isValid = true;
     switch (e.target.name) {
       case "userName":
-        isValid = validator.isAlpha(e.target.value);
+        isValid = validator.isAlphanumeric(e.target.value);
         setNameValid(e.target.value === "" ? true : isValid);
         break;
 
       case "password":
-        isValid = validator.isAlphanumeric(e.target.value, "en-US", { ignore: ".,!@#$%^&*-+=_( )/?'`;><[]{}|~" }); // /.,@#$%^&*()=-+ // 
+        isValid = validator.isAlphanumeric(e.target.value, "en-US", {
+          ignore: ".,!@#$%^&*-+=_()/?'`;><[]{}|~",
+        }); // /.,@#$%^&*()=-+ //
         setPasswordValid(e.target.value === "" ? true : isValid);
         break;
 
@@ -74,8 +76,6 @@ export default function Login() {
           `http://localhost:7070/company/employee/${userObj._id}`
         );
         sessionStorage.setItem("name", JSON.stringify(`${useremployee.firstName}`));
-
-        //logic to add name and id to session from employee
       }
       setAnyChange(!anyChange);
     } else {
@@ -84,15 +84,22 @@ export default function Login() {
     }
   };
 
+const adminButt = ()=>{
+  
+
+}
+
+
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
-      <h4>Login</h4>
+      <h4>Login</h4> 
+      {/* <button onClick={adminButt} >Admin</button> */}
       <span>userName : </span>
-      <input name="userName" id="nameValid" onChange={setUser} type={"text"} /> <br />
-      {nameValid ? null : <span>name is invalid use only..</span>}
+      <input name="userName" id="userName" onChange={setUser} type={"text"} /> <br />
+      {nameValid ? null : <span>name is invalid use only A-Z , a-z , 1-9</span>}
       <br />
-      <span>password : </span> <input name="password" onChange={setUser} type={"text"} /> <br />
-      {passwordValid ? null : <span>password is invalid use only..</span>}
+      <span>password : </span> <input name="password" id="password" onChange={setUser} type={"text"} /> <br />
+      {passwordValid ? null : <span>password is invalid dont use space </span>}
       <br />
       <button onClick={verifyUser}>log me</button> &nbsp;
       <Link to="/newuser">first tame?</Link>
