@@ -100,8 +100,8 @@ export default function AddSubscripsion(props) {
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
       <select name="showId" onChange={setUserInfo}>
-        <label htmlFor="Add new Show"></label>{" "}
-        <option disabled selected value="demo">
+       
+        <option disabled defaultValue="demo">
           Select Show
         </option>{" "}
         {/*  selected maid a eror - need to fix*/}
