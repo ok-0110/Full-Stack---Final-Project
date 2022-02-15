@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import MainContext from "../MainContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [nameValid, setNameValid] = useState(true);
   const [passwordValid, setPasswordValid] = useState(true);
+  const [adminClick, setAdminClick] = useState(false);
 
   const {
     change: [anyChange, setAnyChange],
@@ -44,7 +45,6 @@ export default function Login() {
   const verifyUser = async () => {
     if (nameValid && passwordValid) {
       const { data: allUsers } = await axios.get("http://localhost:7070/company/users");
-      // console.log(allUsers);
       const user = allUsers.find((el) => el.UserName === loggdUser.userName);
       if (user === undefined) {
         alert("user-name not match :(");
@@ -84,21 +84,28 @@ export default function Login() {
     }
   };
 
-const adminButt = ()=>{
-  
+  const adminButt = async () => {
+    // await setLoggdUser({userName: "admin", password: "admin"} )
+    setLoggdUser({ userName: "admin", password: "admin" });
+    setAdminClick(!adminClick);
+  };
 
-}
-
+  useEffect(() => {
+    if (adminClick) {
+      verifyUser();
+    }
+  }, [adminClick]);
 
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
-      <h4>Login</h4> 
-      {/* <button onClick={adminButt} >Admin</button> */}
+      <h4>Login <button onClick={adminButt}>Admin</button></h4>
+      
       <span>userName : </span>
       <input name="userName" id="userName" onChange={setUser} type={"text"} /> <br />
       {nameValid ? null : <span>name is invalid use only A-Z , a-z , 1-9</span>}
       <br />
-      <span>password : </span> <input name="password" id="password" onChange={setUser} type={"text"} /> <br />
+      <span>password : </span>{" "}
+      <input name="password" id="password" onChange={setUser} type={"text"} /> <br />
       {passwordValid ? null : <span>password is invalid dont use space </span>}
       <br />
       <button onClick={verifyUser}>log me</button> &nbsp;

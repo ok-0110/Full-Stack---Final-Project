@@ -4,6 +4,7 @@ import { useNavigate, Routes, Route } from "react-router-dom";
 import AddShow from "./AddShow";
 import AllShows from "./AllShows";
 import EditShow from "./EditShow";
+import SearchComponent from "./SearchComponent";
 import SpecificShow from "./SpecificShow";
 
 export default function Shows() {
@@ -54,7 +55,7 @@ export default function Shows() {
     setSearchTaxtInStaet(e.target.value);
   };
   const search = () => {
-    console.log("search");
+    navigate(`/shows/search/${searchTaxtInStaet}`);
   };
   const allShowsButton = () => {
     navigate("/shows/allshows");
@@ -74,6 +75,7 @@ export default function Shows() {
       <button onClick={search}>search</button>
       <Routes>
         <Route path="*" element={<AllShows />} />
+        <Route path="/search/:stringToSearch" element={<SearchComponent />} />
         <Route path="/allshows" element={<AllShows />} />
         <Route path="/addshow" element={<AddShow />} />
         <Route path="/editshow/:showid" element={<EditShow />} />
