@@ -29,18 +29,18 @@ export default function Member(props) {
   };
 
   return (
-    <div style={{ border: "1px solid black", margin: "4px" }}>
-      <span>{props.data.Name}</span> <br />
-      <span>{`Email: ${props.data.Email} `}</span> <br />
-      <span>{`City: ${props.data.City} `}</span> <br />
+    <div style={{paddingLeft: "5px" , border: "1px solid black", margin: "4px" }}>
+      <span className="fontBolder" style={{fontSize:"17px"}}>{props.data.Name}</span> <br />
+      <span className="fontBold">Email: </span><span>{`${props.data.Email} `}</span> <br />
+      <span className="fontBold">City: </span><span>{`${props.data.City} `}</span> <br />
       {/* <SubscriptionsTOMember memberId={props.data._id} /> */}
-      <button onClick={edit} name="">
-        Edit
+      &nbsp; <button onClick={edit} class="edit" role="button">
+          <span class="text">Edit</span>
       </button>{" "}
       &nbsp; &nbsp;
       {canDelete ? (
-        <button onClick={deleteMember} name="">
-          Delete
+        <button onClick={deleteMember} class="delete" role="button">
+        <span class="text">Delete</span>
         </button>
       ) : null}
       <Subscribers memberId={props.data._id} setReload={props.setReload} />

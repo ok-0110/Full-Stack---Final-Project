@@ -58,10 +58,9 @@ export default function Subscriptions() {
 
   return (
     <div>
-      <span>Members</span>
-      <br />
-      <button onClick={allMemberButton}>All Members</button>
-      {canCreate ? <button onClick={addMemberButton}>Add Members</button> : null}
+      
+      &nbsp; <button onClick={allMemberButton} class="all">All Members</button>
+      &nbsp; {canCreate ? <button onClick={addMemberButton} class="add">Add Members</button> : null}
 
       
       <Routes>

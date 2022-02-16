@@ -190,12 +190,16 @@ export default function EditUser() {
 
   //========================================return
   return (
-    <div style={{ border: "1px solid black", margin: "4px" }}>
-      <span>Edit user</span>
-      <br />
+    <div style={{ paddingLeft: "5px", border: "1px solid black", margin: "4px" }}>
+      <span className="fontBolder" style={{ fontSize: "20px" }}>
+        Edit user
+      </span>
+      <br /> <br />
       {/* arrOfOldPermissions */}
       <form>
-        <label htmlFor="View Subscriptions">View Subscriptions:</label>{" "}
+        <label className="fontBold" htmlFor="View Subscriptions">
+          View Subscriptions:
+        </label>{" "}
         <input
           type={"checkbox"}
           onChange={hendelCheckbox}
@@ -204,7 +208,9 @@ export default function EditUser() {
           name="View Subscriptions"
         />
         <br />
-        <label htmlFor="Create Subscriptions">Create Subscriptions:</label>{" "}
+        <label className="fontBold" htmlFor="Create Subscriptions">
+          Create Subscriptions:
+        </label>{" "}
         <input
           type={"checkbox"}
           onChange={hendelCheckbox}
@@ -213,7 +219,9 @@ export default function EditUser() {
           name="Create Subscriptions"
         />
         <br />
-        <label htmlFor="Delete Subscriptions">Delete Subscriptions:</label>{" "}
+        <label className="fontBold" htmlFor="Delete Subscriptions">
+          Delete Subscriptions:
+        </label>{" "}
         <input
           type={"checkbox"}
           onChange={hendelCheckbox}
@@ -222,7 +230,9 @@ export default function EditUser() {
           name="Delete Subscriptions"
         />
         <br />
-        <label htmlFor="View Movies">View Movies:</label>{" "}
+        <label className="fontBold" htmlFor="View Movies">
+          View Movies:
+        </label>{" "}
         <input
           type={"checkbox"}
           onChange={hendelCheckbox}
@@ -231,7 +241,9 @@ export default function EditUser() {
           name="View Movies"
         />
         <br />
-        <label htmlFor="Create Movies">Create Movies:</label>{" "}
+        <label className="fontBold" htmlFor="Create Movies">
+          Create Movies:
+        </label>{" "}
         <input
           type={"checkbox"}
           onChange={hendelCheckbox}
@@ -240,7 +252,9 @@ export default function EditUser() {
           name="Create Movies"
         />
         <br />
-        <label htmlFor="Delete Movies">Delete Movies:</label>{" "}
+        <label className="fontBold" htmlFor="Delete Movies">
+          Delete Movies:
+        </label>{" "}
         <input
           type={"checkbox"}
           onChange={hendelCheckbox}
@@ -249,8 +263,11 @@ export default function EditUser() {
           name="Delete Movies"
         />
         <br />
+        <br />
         {/*  */}
-        <label htmlFor="First Name">First Name: </label>
+        <label className="fontBold" htmlFor="First Name">
+          First Name:{" "}
+        </label>
         <input
           type={"text"}
           defaultValue={employeeFromJson.firstName}
@@ -258,8 +275,15 @@ export default function EditUser() {
           name="firstName"
         />{" "}
         <br />
-        {firstName ? null : <span>name is invalid use only A-Z , a-z </span>} <br />
-        <label htmlFor="Last Name">Last Name: </label>
+        {firstName ? null : (
+          <span style={{ fontSize: "12px", color: "#690b03" }}>
+            name is invalid use only A-Z , a-z{" "}
+          </span>
+        )}{" "}
+        <br />
+        <label className="fontBold" htmlFor="Last Name">
+          Last Name:{" "}
+        </label>
         <input
           type={"text"}
           defaultValue={employeeFromJson.lastName}
@@ -267,8 +291,15 @@ export default function EditUser() {
           name="lastName"
         />{" "}
         <br />
-        {lastName ? null : <span>name is invalid use only A-Z , a-z </span>} <br />
-        <label htmlFor="User Name">User Name: </label>
+        {lastName ? null : (
+          <span style={{ fontSize: "12px", color: "#690b03" }}>
+            name is invalid use only A-Z , a-z{" "}
+          </span>
+        )}{" "}
+        <br />
+        <label className="fontBold" htmlFor="User Name">
+          User Name:{" "}
+        </label>
         <input
           type={"text"}
           defaultValue={employeeFromJson.userName}
@@ -276,31 +307,48 @@ export default function EditUser() {
           name="userName"
         />{" "}
         <br />
-        {userName ? null : <span>name is invalid use only A-Z , a-z , 1-9</span>} <br />
-        <label htmlFor="Created date"> Created date: </label>
+        {userName ? null : (
+          <span style={{ fontSize: "12px", color: "#690b03" }}>
+            name is invalid use only A-Z , a-z , 1-9
+          </span>
+        )}{" "}
+        <br />
+        <label className="fontBold" htmlFor="Created date">
+          {" "}
+          Created date:{" "}
+        </label>
         <input
           type={"date"}
           defaultValue={employeeFromJson.createdDate}
           onChange={setUserInfo}
           name="createdDate"
-          //   defaultValue={coretTime}
+          style={{ width: "155px" }}
         />
         <br />
-        <label htmlFor="Session Time Out"> Session Time Out: </label>
+        <br />
+        <label className="fontBold" htmlFor="Session Time Out">
+          {" "}
+          Session Time Out:{" "}
+        </label>
         <input
           type={"number"}
           defaultValue={employeeFromJson.SessionTimeOut}
           onChange={setUserInfo}
           name="SessionTimeOut"
           min={0}
+          style={{ width: "120px" }}
         />
         <br />
-        {/*  */}
-        <label htmlFor="submit"></label>
-        <input type={"submit"} value="Update" onClick={submit} name="submit" />
-        &nbsp; &nbsp;
-        <label htmlFor="cancel"></label>
-        <input type={"button"} value="Cancel" onClick={cancel} name="cancel" />
+        <br />
+        &nbsp;{" "}
+        <button class="updateOrAdd" role="button" onClick={submit} name="submit">
+          <span class="text">Update</span>
+        </button>
+        &nbsp;{" "}
+        <button class="cancel" role="button" onClick={cancel} name="cancel">
+          <span class="text">Cancel</span>
+        </button>
+        <br />
         <br />
       </form>
     </div>

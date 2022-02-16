@@ -80,27 +80,27 @@ export default function AddSubscripsion(props) {
     setNewMemberSun({ showId: " ", date: coretTime });
   }, [coretTime]);
 
-
-  
   const saveNewSub = async () => {
-      const [reload, setReload] = props.setReload 
+    const [reload, setReload] = props.setReload;
     if (newMemberSun.showId !== " ") {
-        //add to db
-        const {data:respons}= await axios.put(`http://localhost:8080/subscriptions/subscribers/addShow/${props.memberId}/${newMemberSun.showId}/${newMemberSun.date}`)
-        console.log(respons);
-        //apdate page 
-        window.location.reload();
+      //add to db
+      const { data: respons } = await axios.put(
+        `http://localhost:8080/subscriptions/subscribers/addShow/${props.memberId}/${newMemberSun.showId}/${newMemberSun.date}`
+      );
+      console.log(respons);
+      //apdate page
+      window.location.reload();
 
-        alert("Aded show")
-    }else{
-        alert("please select show")
+      alert("Aded show");
+    } else {
+      alert("please select show");
     }
   };
 
   return (
-    <div style={{ border: "1px solid black", margin: "4px" }}>
+    <div style={{padding:"5px", border: "1px solid black", margin: "4px" }}>
+      &nbsp;&nbsp;&nbsp;
       <select name="showId" onChange={setUserInfo}>
-       
         <option disabled defaultValue="demo">
           Select Show
         </option>{" "}
@@ -110,10 +110,19 @@ export default function AddSubscripsion(props) {
             {option.label}
           </option>
         ))}
-      </select> &nbsp;
-      <label htmlFor="Date">Date :</label>{" "} 
-      <input type={"date"} onChange={setUserInfo} name="date" defaultValue={coretTime} /> <br/>
-      <button onClick={saveNewSub}>Add To Subscripsions </button>
+      </select>{" "}
+      &nbsp;&nbsp;
+      <label htmlFor="Date">Date:</label>{" "}
+      <input type={"date"} onChange={setUserInfo} name="date" defaultValue={coretTime} /> <br />
+      &nbsp;&nbsp;&nbsp;
+      <button
+        onClick={saveNewSub}
+        style={{ padding: "0.3em 0.2em" }}
+        class="updateOrAdd"
+        role="button"
+      >
+        <span class="text">Add To Subscripsions</span>
+      </button>
     </div>
   );
 }

@@ -28,7 +28,7 @@ export default function AllUsers() {
 
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
-      <span>all users</span>
+      
       {allUsers}
     </div>
   );

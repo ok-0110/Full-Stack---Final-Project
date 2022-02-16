@@ -20,22 +20,24 @@ export default function ManageUsers() {
     navigate(`/${e.target.name}`);
   };
 
-  const buttons = (<div>
-        <button onClick={navigateTo} name="manageusers/allusers">
+  const buttons = (
+    <div>
+      &nbsp;{" "}
+      <button onClick={navigateTo} class="all" name="manageusers/allusers">
         All Users
-      </button> 
-        <button onClick={navigateTo} name="manageusers/adduser">
+      </button>
+      &nbsp;{" "}
+      <button onClick={navigateTo} class="add" name="manageusers/adduser">
         Add User
       </button>
       &nbsp;
-  </div>)
+    </div>
+  );
 
   return (
-    <div style={{ border: "1px solid black", margin: "4px" }}>
-        <br/> 
-        {buttons}
-        <br/>
-    
+    <div>
+      {buttons}
+
       <Routes>
         <Route path="*" element={<AllUsers />} />
         <Route path="/allusers" element={<AllUsers />} />

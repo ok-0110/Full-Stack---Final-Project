@@ -5,7 +5,6 @@ import ManageUsers from "./manageUsers/ManageUsers";
 import Shows from "./shows/Shows";
 import Members from "./Subscribers/Members";
 
-
 export default function MainPage() {
   const {
     change: [anyChange, setAnyChange],
@@ -31,49 +30,59 @@ export default function MainPage() {
 
   const adminButtons = (
     <div>
-      <button onClick={navigateTo} name="manageusers">
+      &nbsp; &nbsp;{" "}
+      <button class="mainButton" role="button" onClick={navigateTo} name="manageusers">
         Users Managment
       </button>
-      &nbsp;
-      <button onClick={navigateTo} name="shows">
+      {/* &nbsp;&nbsp; */}
+      <button class="mainButton" role="button" onClick={navigateTo} name="shows">
         Shows
       </button>
-      &nbsp;
-      <button onClick={navigateTo} name="Subscribers">
+      {/* &nbsp;&nbsp; */}
+      <button class="mainButton" role="button" onClick={navigateTo} name="Subscribers">
         Subscriptions
       </button>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+      <button class="mainButton" role="button" onClick={logOut}>
+        Log Out
+      </button>{" "}
       &nbsp;
-      <button onClick={logOut}>Log Out</button> &nbsp;
     </div>
   );
   const employeeButtons = (
     <div>
+      &nbsp; &nbsp;{" "}
       {permissions.find((el) => el === "View Movies") ? (
-        <button onClick={navigateTo} name="shows">
+        <button class="mainButton" role="button" onClick={navigateTo} name="shows">
           Shows
         </button>
       ) : null}
       {permissions.find((el) => el === "View Subscriptions") ? (
-        <button onClick={navigateTo} name="Subscribers">
+        <button class="mainButton" role="button" onClick={navigateTo} name="Subscribers">
           Subscriptions
         </button>
       ) : null}
-      <button onClick={logOut}>Log Out</button> &nbsp;
+      &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+      <button class="mainButton" role="button" onClick={logOut}>
+        Log Out
+      </button>{" "}
+      &nbsp;
     </div>
   );
   //=============================================start of return
   return (
-    <div style={{ border: "1px solid black", margin: "4px" }}>
-      <h3>{`hello ${nameOfUser}, Welcome back`}</h3>
+    <div style={{ maxWidth: "550px", border: "1px solid black", margin: "4px" }}>
+      <h3>&nbsp;&nbsp;{`Hello ${nameOfUser}, Welcome back`}</h3>
       {isAdmin ? adminButtons : employeeButtons}
+      <br />
       <Routes>
         <Route path="*" element={null} />
         {/* <Route path="/" element={null} /> */}
         <Route path="/manageusers/*" element={<ManageUsers />} />
         <Route path="/shows/*" element={<Shows />} />
-        <Route path="/Subscribers/*" element={<Members/>} />
+        <Route path="/Subscribers/*" element={<Members />} />
       </Routes>
-      <br /> <span>main footer</span>
+       
     </div>
   );
 }

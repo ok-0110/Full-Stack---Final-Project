@@ -104,20 +104,23 @@ export default function FirstTime() {
 
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
-      <h4>First Time?</h4>
-      <span>userName : </span>
+      <br/>
+      &nbsp; <span className="fontBolder">First Time</span>   <br/><br/>
+      &nbsp;  <span>userName : </span>
       <input name="userName" onChange={setUser} type={"text"} /> <br />
-      {nameValid ? null : <span>name is invalid use only A-Z , a-z , 1-9</span>} <br />
-      <span>Corent password : </span> <input name="password" onChange={setUser} type={"text"} />{" "}
+      &nbsp;{nameValid ? null : <span style={{ fontSize: "12px", color: "#690b03" }}>name is invalid use only A-Z , a-z , 1-9</span>} <br />
+      &nbsp; <span>Corent password : </span> <input name="password" onChange={setUser} type={"text"} />{" "}
       <br />
-      {passwordValid ? null : <span>password is invalid dont use space </span>}
+      &nbsp; {passwordValid ? null : <span style={{ fontSize: "12px", color: "#690b03" }}>password is invalid dont use space </span>}
       <br />
-      <span>New password : </span> <input name="newPassword" onChange={setUser2} type={"text"} />{" "}
+      &nbsp;  <span>New password : </span> <input name="newPassword" onChange={setUser2} type={"password"} />{" "}
       <br />
-      {newpasswordValid ? null : <span>password is invalid dont use space </span>}
+      &nbsp; {newpasswordValid ? null : <span style={{ fontSize: "12px", color: "#690b03" }}>password is invalid dont use space, dont use "1234" </span>}
       <br />
-      <button onClick={verifyUser}>set me</button> &nbsp;
-      <Link to="/">back to login</Link>;
+      &nbsp; <button  class="mainButton" role="button" onClick={verifyUser}>set me</button> &nbsp; &nbsp;&nbsp;
+      <Link to="/">Back to Login </Link>
+      <br/>
+      <br/>
     </div>
   );
 }

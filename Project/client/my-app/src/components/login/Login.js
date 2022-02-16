@@ -98,18 +98,21 @@ export default function Login() {
 
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
-      <h4>Login <button onClick={adminButt}>Admin</button></h4>
-      
-      <span>userName : </span>
+      <br/>
+     &nbsp; <span className="fontBolder">Login</span>   <br/><br/>
+      &nbsp; <button class="admin" role="button" onClick={adminButt}>Admin</button> <br/><br/>
+      &nbsp; <span>userName : </span>
       <input name="userName" id="userName" onChange={setUser} type={"text"} /> <br />
       {nameValid ? null : <span>name is invalid use only A-Z , a-z , 1-9</span>}
       <br />
-      <span>password : </span>{" "}
-      <input name="password" id="password" onChange={setUser} type={"text"} /> <br />
+      &nbsp;  <span>password : </span>{" "}
+      <input name="password" id="password" onChange={setUser} type={"password"} /> <br />
       {passwordValid ? null : <span>password is invalid dont use space </span>}
       <br />
-      <button onClick={verifyUser}>log me</button> &nbsp;
+      &nbsp;&nbsp; <button class="mainButton" role="button" onClick={verifyUser}>log me</button> &nbsp; &nbsp;&nbsp;
       <Link to="/newuser">first tame?</Link>
+      <br/>
+      <br/>
     </div>
   );
 }

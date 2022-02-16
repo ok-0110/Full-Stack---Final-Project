@@ -75,20 +75,29 @@ export default function EditShow() {
 
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
-      <span>Edit Show </span>
-      <label htmlFor="show Name">show Name: </label>
+      <br />
+      <span className="fontBolder">Edit Show </span> <br />
+      <br />
+      <label htmlFor="show Name" className="fontBold">
+        show Name:{" "}
+      </label>
       <input type={"text"} onChange={setShowInfo} name="Name" defaultValue={newShowInfo.Name} />
       <br />
       {nameValid ? null : <span>show is invalid use Min of 1 letters</span>} <br />
-      <label htmlFor="Genres">{`Genres: `}</label>
+      <label htmlFor="Genres" className="fontBold">{`Genres: `}</label>
       <input type={"text"} onChange={setShowInfo} name="Genres" defaultValue={newShowInfo.Genres} />
       <br />
       {genresValid ? null : <span>Genres is invalid use Min of 1 letters </span>} <br />
-      <label htmlFor="Image URL">Image URL: </label>
+      <label htmlFor="Image URL" className="fontBold">
+        Image URL:{" "}
+      </label>
       <input type={"text"} onChange={setShowInfo} name="Image" defaultValue={newShowInfo.Image} />
       <br />
       {imagValid ? null : <span>Image is invalid use Min of 1 letters</span>} <br />
-      <label htmlFor="Premiered date"> Premiered date: </label>
+      <label htmlFor="Premiered date" className="fontBold">
+        {" "}
+        Premiered date:{" "}
+      </label>
       <input
         type={"date"}
         onChange={setShowInfo}
@@ -96,12 +105,17 @@ export default function EditShow() {
         defaultValue={newShowInfo.Premiered.slice(0, 10)}
       />
       <br />
-      <label htmlFor="submit"></label>
-      <input type={"submit"} value="Update" onClick={submit} name="submit" />
-      &nbsp; &nbsp;
-      <label htmlFor="cancel"></label>
-      <input type={"button"} value="Cancel" onClick={cancel} name="cancel" />
+     
       <br />
+      &nbsp;{" "}
+      <button class="updateOrAdd" role="button" onClick={submit} name="submit">
+        <span class="text">Update</span>
+      </button>
+      &nbsp;{" "}
+      <button class="cancel" role="button" onClick={cancel} name="cancel">
+        <span class="text">Cancel</span> 
+      </button>
+      <br /><br />
     </div>
   );
 }

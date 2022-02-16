@@ -63,31 +63,63 @@ export default function AddShow() {
   return (
     <div style={{ border: "1px solid black", margin: "4px" }}>
       <br />
-      <label htmlFor="show Name">show Name: </label>
+      <span className="fontBolder">Add Show </span>
+      <br />
+      <br />
+      <label className="fontBolder" htmlFor="show Name">
+        show Name:{" "}
+      </label>
       <input type={"text"} onChange={setShowInfo} name="Name" />
       <br />
-      {nameValid ? null : <span>show is invalid use Min of 1 letters</span>} <br />
-      <label htmlFor="Genres">Genres: </label>
+      {nameValid ? null : (
+        <span style={{ fontSize: "12px", color: "#690b03" }}>
+          show is invalid use Min of 1 letters
+        </span>
+      )}{" "}
+      <br />
+      <label className="fontBolder" htmlFor="Genres">
+        Genres:{" "}
+      </label>
       <input
         type={"text"}
         placeholder="Science-Fiction,Action,Crime"
         onChange={setShowInfo}
         name="Genres"
+        style={{ width: "200px" }}
       />{" "}
       <br />
-      {genresValid ? null : <span>Genres is invalid use Min of 1 letters </span>} <br />
-      <label htmlFor="Image URL">Image URL: </label>
-      <input type={"text"} onChange={setShowInfo} name="Image" />
+      {genresValid ? null : (
+        <span style={{ fontSize: "12px", color: "#690b03" }}>
+          Genres is invalid use Min of 1 letters{" "}
+        </span>
+      )}{" "}
       <br />
-      {imagValid ? null : <span>Image is invalid use Min of 1 letters</span>} <br />
-      <label htmlFor="Premiered date"> Premiered date: </label>
-      <input type={"date"} onChange={setShowInfo} name="Premiered" />
+      <label className="fontBolder" htmlFor="Image URL">
+        Image URL:{" "}
+      </label>
+      <input type={"text"} onChange={setShowInfo} name="Image" style={{ width: "175px" }} />
       <br />
-      <label htmlFor="submit"></label>
-      <input type={"submit"} value="Add" onClick={submit} name="submit" />
-      &nbsp; &nbsp;
-      <label htmlFor="cancel"></label>
-      <input type={"button"} value="Cancel" onClick={cancel} name="cancel" />
+      {imagValid ? null : (
+        <span style={{ fontSize: "12px", color: "#690b03" }}>
+          Image is invalid use Min of 1 letters
+        </span>
+      )}{" "}
+      <br />
+      <label className="fontBolder" htmlFor="Premiered date">
+        {" "}
+        Premiered date:{" "}
+      </label>
+      <input type={"date"} onChange={setShowInfo} name="Premiered" style={{ width: "150px" }} />
+      <br /> <br />
+      &nbsp;{" "}
+      <button class="updateOrAdd" role="button" onClick={submit} name="submit">
+        <span class="text">Add</span>
+      </button>
+      &nbsp;{" "}
+      <button class="cancel" role="button" onClick={cancel} name="cancel">
+        <span class="text">Cancel</span>
+      </button>
+      <br />
       <br />
     </div>
   );

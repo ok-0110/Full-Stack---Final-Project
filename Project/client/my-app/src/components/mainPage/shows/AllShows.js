@@ -21,7 +21,7 @@ export default function AllShows() {
   },[reload])
   return (
     <div>
-      All Shows
+      
       {allShows}
     </div>
   );

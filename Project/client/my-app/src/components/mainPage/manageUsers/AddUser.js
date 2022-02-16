@@ -16,7 +16,7 @@ export default function AddUser() {
           ignore: " -",
         });
         if (isValid) {
-          isValid = validator.isByteLength(e.target.value,{min:2, max: 10})
+          isValid = validator.isByteLength(e.target.value, { min: 2, max: 10 });
         }
         setFirstNameValid(e.target.value === "" ? true : isValid);
         break;
@@ -26,7 +26,7 @@ export default function AddUser() {
           ignore: " -",
         });
         if (isValid) {
-          isValid = validator.isByteLength(e.target.value,{min:2, max: 10})
+          isValid = validator.isByteLength(e.target.value, { min: 2, max: 10 });
         }
         setLastNameValid(e.target.value === "" ? true : isValid);
         break;
@@ -142,15 +142,22 @@ export default function AddUser() {
 
   //========================================return
   return (
-    <div style={{ border: "1px solid black", margin: "4px" }}>
-      <span>add user</span>
+    <div style={{ paddingLeft:"5px", border: "1px solid black", margin: "4px" }}>
+      <span className="fontBolder" style={{ fontSize: "20px" }}>
+        add user
+      </span>
+      <br />
       <br />
 
       <form>
-        <label htmlFor="View Subscriptions">View Subscriptions:</label>{" "}
+        <label htmlFor="View Subscriptions" className="fontBold">
+          View Subscriptions:
+        </label>{" "}
         <input type={"checkbox"} onClick={hendelCheckbox} className="0" name="View Subscriptions" />
         <br />
-        <label htmlFor="Create Subscriptions">Create Subscriptions:</label>{" "}
+        <label htmlFor="Create Subscriptions" className="fontBold">
+          Create Subscriptions:
+        </label>{" "}
         <input
           type={"checkbox"}
           onClick={hendelCheckbox}
@@ -158,7 +165,9 @@ export default function AddUser() {
           name="Create Subscriptions"
         />
         <br />
-        <label htmlFor="Delete Subscriptions">Delete Subscriptions:</label>{" "}
+        <label htmlFor="Delete Subscriptions" className="fontBold">
+          Delete Subscriptions:
+        </label>{" "}
         <input
           type={"checkbox"}
           onClick={hendelCheckbox}
@@ -166,46 +175,93 @@ export default function AddUser() {
           name="Delete Subscriptions"
         />
         <br />
-        <label htmlFor="View Movies">View Movies:</label>{" "}
+        <label htmlFor="View Movies" className="fontBold">
+          View Movies:
+        </label>{" "}
         <input type={"checkbox"} onClick={hendelCheckbox} className="3" name="View Movies" />
         <br />
-        <label htmlFor="Create Movies">Create Movies:</label>{" "}
+        <label htmlFor="Create Movies" className="fontBold">
+          Create Movies:
+        </label>{" "}
         <input type={"checkbox"} onClick={hendelCheckbox} className="4" name="Create Movies" />
         <br />
-        <label htmlFor="Delete Movies">Delete Movies:</label>{" "}
+        <label htmlFor="Delete Movies" className="fontBold">
+          Delete Movies:
+        </label>{" "}
         <input type={"checkbox"} onClick={hendelCheckbox} className="5" name="Delete Movies" />
         <br />
+        <br />
         {/*  */}
-        <label htmlFor="First Name">First Name: </label>
+        <label className="fontBold" htmlFor="First Name">
+          First Name:{" "}
+        </label>
         <input type={"text"} onChange={setUserInfo} name="firstName" />
         <br />
-        {firstName ? null : <span>firstName is invalid use only A-Z , a-z , Between 2-10 letters  </span>} <br />
-        <label htmlFor="Last Name">Last Name: </label>
+        {firstName ? null : (
+          <span style={{ fontSize: "12px", color: "#690b03" }}>
+            firstName is invalid use only A-Z , a-z , Between 2-10 letters{" "}
+          </span>
+        )}{" "}
+        <br />
+        <label className="fontBold" htmlFor="Last Name">
+          Last Name:{" "}
+        </label>
         <input type={"text"} onChange={setUserInfo} name="lastName" />
         <br />
-        {lastName ? null : <span>lastName is invalid use only A-Z , a-z , Between 2-10 letters   </span>} <br />
-        <label htmlFor="User Name">User Name: </label>
+        {lastName ? null : (
+          <span style={{ fontSize: "12px", color: "#690b03" }}>
+            lastName is invalid use only A-Z , a-z , Between 2-10 letters{" "}
+          </span>
+        )}{" "}
+        <br />
+        <label className="fontBold" htmlFor="User Name">
+          User Name:{" "}
+        </label>
         <input type={"text"} onChange={setUserInfo} name="userName" />
         <br />
-        {userName ? null : <span>userName is invalid use only A-Z , a-z , 1-9</span>} <br />
-        <label htmlFor="Created date"> Created date: </label>
-        <input type={"date"} onChange={setUserInfo} name="createdDate" defaultValue={coretTime} />
+        {userName ? null : (
+          <span style={{ fontSize: "12px", color: "#690b03" }}>
+            userName is invalid use only A-Z , a-z , 1-9
+          </span>
+        )}{" "}
         <br />
-        <label htmlFor="Session Time Out"> Session Time Out: </label>
+        <label className="fontBold" htmlFor="Created date">
+          {" "}
+          Created date:{" "}
+        </label>
+        <input
+          type={"date"}
+          onChange={setUserInfo}
+          name="createdDate"
+          defaultValue={coretTime}
+          style={{ width: "155px" }}
+        />
+        <br />
+        <br />
+        <label className="fontBold" htmlFor="Session Time Out">
+          {" "}
+          Session Time Out:{" "}
+        </label>
         <input
           type={"number"}
           onChange={setUserInfo}
           name="SessionTimeOut"
           min={0}
           defaultValue={60}
+          style={{ width: "120px" }}
         />
-        <br />
+        
         {/*  */}
-        <label htmlFor="submit"></label>
-        <input type={"submit"} value="Add" onClick={submit} name="submit" />
-        &nbsp; &nbsp;
-        <label htmlFor="cancel"></label>
-        <input type={"button"} value="Cancel" onClick={cancel} name="cancel" />
+        <br /> <br />
+        &nbsp;{" "}
+        <button class="updateOrAdd" role="button" onClick={submit} name="submit">
+          <span class="text">Add</span>
+        </button>
+        &nbsp;{" "}
+        <button class="cancel" role="button" onClick={cancel} name="cancel">
+          <span class="text">Cancel</span>
+        </button>
+        <br />
         <br />
       </form>
     </div>

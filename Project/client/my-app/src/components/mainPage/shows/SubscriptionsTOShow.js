@@ -61,8 +61,8 @@ export default function SubscriptionsTOShow(props) {
   }, [allSubs]);
 
   return (
-    <div style={{ border: "1px solid black", margin: "4px" }}>
-      <span>subscribers status: </span>
+    <div style={{ paddingLeft: "5px", border: "1px solid black", margin: "4px" }}>
+      <span className="fontBold">subscribers status: </span>
       {listOfSub.length >= 1 ? <ul>{listOfSub}</ul> : <span>no subscribers</span>}
     </div>
   );

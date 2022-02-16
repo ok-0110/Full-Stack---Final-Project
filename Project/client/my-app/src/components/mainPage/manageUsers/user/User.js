@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 import axios from "axios";
 
 export default function User(props) {
- 
   const navigate = useNavigate();
   const [permissions, setPermissions] = useState({});
   const [reload, setReload] = props.setReload;
@@ -35,29 +33,38 @@ export default function User(props) {
   };
 
   const edit = () => {
-   
     navigate(`/manageusers/editUser/${props.data.userId}`);
   };
 
   return (
-    <div style={{ border: "1px solid black", margin: "4px" }}>
-      <span>{`Name: ${props.data.firstName} ${props.data.lastName}`}</span> <br />
-      <span>{`User Name: ${props.data.userName}`}</span> <br />
-      <span>{`created date: ${props.data.createdDate}`}</span> <br />
-      <span>{`session time out: ${props.data.SessionTimeOut}`}</span> <br />
-      <span>{`permissions:`}</span>
+    <div style={{paddingLeft:"5px", border: "1px solid black", margin: "4px" }}>
+      <span className="fontBold">Name: </span>
+      <span
+        className="fontBolder"
+        style={{ fontSize: "17px" }}
+      >{`${props.data.firstName} ${props.data.lastName}`}</span>{" "}
+      <br />
+      <span className="fontBold">User Name: </span>
+      <span>{`${props.data.userName}`}</span> <br />
+      <span className="fontBold">created date: </span>
+      <span>{`${props.data.createdDate}`}</span> <br />
+      <span className="fontBold">session time out: </span>
+      <span>{`${props.data.SessionTimeOut}`}</span> <br />
+      <span className="fontBold">{`permissions:`}</span>
       <ul>
         {permissions.permissions === undefined
           ? null
           : permissions.permissions.map((el, index) => <li key={index}>{el}</li>)}
       </ul>
-      <button onClick={edit} name="">
-        Edit
+      &nbsp;<button onClick={edit} class="edit" name="">
+        <span class="text">Edit</span>
       </button>{" "}
       &nbsp; &nbsp;
-      <button onClick={deleteUser} name="">
-        Delete
+      <button onClick={deleteUser} class="delete" name="">
+        <span class="text">Delete</span>
       </button>
+      <br />
+      <br />
     </div>
   );
 }

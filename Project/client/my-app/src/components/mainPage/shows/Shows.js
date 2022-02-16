@@ -66,13 +66,12 @@ export default function Shows() {
 
   return (
     <div>
-      <span>Shows</span>
-      <br />
-      <button onClick={allShowsButton}>All Shows</button>
-      {canCreate ? <button onClick={addShowButton}>Add Show</button> : null}
-      <label htmlFor="search for show">search for show : </label>{" "}
-      <input type={"text"} onChange={searchText} />
-      <button onClick={search}>search</button>
+    
+      &nbsp; <button class="all" onClick={allShowsButton}>All Shows</button>
+      &nbsp; {canCreate ? <button  class="add" onClick={addShowButton}>Add Show</button> : null}
+      &nbsp; <label htmlFor="search for show"></label>{" "}
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type={"text"}  placeholder="search for show:" onChange={searchText} />
+      <button   onClick={search}>search</button>
       <Routes>
         <Route path="*" element={<AllShows />} />
         <Route path="/search/:stringToSearch" element={<SearchComponent />} />

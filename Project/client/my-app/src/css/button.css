@@ -1,0 +1,507 @@
+/* CSS==================================mainButton */
+.mainButton {
+  font-family: Roboto, "Open Sans", sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.6px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.mainButton:hover{
+    background-color: #949494;
+}
+
+.mainButton:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .mainButton {
+    padding: 0.25em 0.75em;
+  }
+}
+
+/* CSS==================================delete eb6363  */
+.delete {
+  appearance: none;
+  background-color: #f8a5a5;
+  border: 1px solid black;
+  /* border-width: 1; */
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roboto, Clarkson, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 1em;
+  margin: 0;
+  opacity: 1;
+  outline: 0;
+  padding: 0.6em 1.5em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: geometricprecision;
+  text-transform: uppercase;
+  transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    background-color 100ms cubic-bezier(0.694, 0, 0.335, 1),
+    color 100ms cubic-bezier(0.694, 0, 0.335, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.delete:before {
+  animation: opacityFallbackOut 0.5s step-end forwards;
+  backface-visibility: hidden;
+  background-color: #eb6363;
+  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1),
+    -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 100%;
+}
+
+.delete:hover:before {
+  animation: opacityFallbackIn 0s step-start forwards;
+  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+}
+
+.delete:after {
+  background-color: #eb6363;
+}
+
+.delete span {
+  z-index: 1;
+  position: relative;
+}
+
+/* CSS==================================edit  */
+.edit {
+  appearance: none;
+  background-color: #4ecfe6;
+  border: 1px solid black;
+  /* border-width: 0; */
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roboto, Clarkson, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 1em;
+  margin: 0;
+  opacity: 1;
+  outline: 0;
+  padding: 0.6em 1.5em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: geometricprecision;
+  text-transform: uppercase;
+  transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    background-color 100ms cubic-bezier(0.694, 0, 0.335, 1),
+    color 100ms cubic-bezier(0.694, 0, 0.335, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.edit:before {
+  animation: opacityFallbackOut 0.5s step-end forwards;
+  backface-visibility: hidden;
+  background-color: #3591a1;
+  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1),
+    -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 100%;
+}
+
+.edit:hover:before {
+  animation: opacityFallbackIn 0s step-start forwards;
+  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+}
+
+.edit:after {
+  background-color: #3591a1;
+}
+
+.edit span {
+  z-index: 1;
+  position: relative;
+}
+
+/* CSS==================================updateOrAdd  */
+.updateOrAdd {
+  appearance: none;
+  background-color: #3eeeaa;
+  border: 1px solid black;
+  /* border-width: 0; */
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roboto, Clarkson, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 1em;
+  margin: 0;
+  opacity: 1;
+  outline: 0;
+  padding: 0.6em 1.5em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: geometricprecision;
+  text-transform: uppercase;
+  transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    background-color 100ms cubic-bezier(0.694, 0, 0.335, 1),
+    color 100ms cubic-bezier(0.694, 0, 0.335, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.updateOrAdd:before {
+  animation: opacityFallbackOut 0.5s step-end forwards;
+  backface-visibility: hidden;
+  background-color: #2fa578;
+  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1),
+    -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 100%;
+}
+
+.updateOrAdd:hover:before {
+  animation: opacityFallbackIn 0s step-start forwards;
+  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+}
+
+.updateOrAdd:after {
+  background-color: #2fa578;
+}
+
+.updateOrAdd span {
+  z-index: 1;
+  position: relative;
+}
+/* CSS==================================cancel  */
+.cancel {
+  appearance: none;
+  background-color: #c887ca;
+  border: 1px solid black;
+  /* border-width: 0; */
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roboto, Clarkson, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  line-height: 1em;
+  margin: 0;
+  opacity: 1;
+  outline: 0;
+  padding: 0.6em 1.5em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: geometricprecision;
+  text-transform: uppercase;
+  transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1),
+    background-color 100ms cubic-bezier(0.694, 0, 0.335, 1),
+    color 100ms cubic-bezier(0.694, 0, 0.335, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.cancel:before {
+  animation: opacityFallbackOut 0.5s step-end forwards;
+  backface-visibility: hidden;
+  background-color: #a33fa7;
+  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transform: translateZ(0);
+  transition: clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1),
+    -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  width: 100%;
+}
+
+.cancel:hover:before {
+  animation: opacityFallbackIn 0s step-start forwards;
+  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+}
+
+.cancel:after {
+  background-color: #a33fa7;
+}
+
+.cancel span {
+  z-index: 1;
+  position: relative;
+}
+
+
+/* CSS==================================all  */
+.all {
+    width: 90px;
+    height: 25px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #fff 171717;
+    color: #171717;
+    border: 1;
+    border-color: black;
+    border-radius: 5px;
+    transition: all .4s;
+   }
+   
+   .all:hover {
+    border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0 6px 0 -2px #eb6363,
+     0 13px 0 -4px #3591a1,
+     0 14px 10px -3px #3591a1;
+   }
+   
+   .all:active {
+    transition: all 0.2s;
+    transform: translateY(-5px);
+    box-shadow: 0 2px 0 -2px #eb6363,
+     0 6px 0 -4px #3591a1,
+     0 7px 10px -3px #3591a1;
+   }
+
+/* CSS==================================add  */
+.add {
+    width: 90px;
+    height: 25px;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #fff 171717;
+    color: #171717;
+    border: 1;
+    border-color: black;
+    border-radius: 5px;
+    transition: all .4s;
+   }
+   
+   .add:hover {
+    border-radius: 5px;
+    transform: translateY(-10px);
+    box-shadow: 0 6px 0 -2px #3eeeaa,
+     0 13px 0 -4px #c887ca,
+     0 14px 10px -3px #c887ca;
+   }
+   
+   .add:active {
+    transition: all 0.2s;
+    transform: translateY(-5px);
+    box-shadow: 0 6x 0 -2px #3eeeaa,
+     0 13px 0 -4px #c887ca,
+     0 14px 10px -3px #c887ca;
+   }
+
+
+  
+
+
+/* CSS=========================================== */
+.button-28 {
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  letter-spacing: 0.3px;
+  box-sizing: border-box;
+  color: black;
+  background-color: #bebebe;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Roboto,Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 11px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-width: 0;
+  outline: none;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 170px;
+  height: 25px;
+  will-change: transform;
+}
+
+.button-28:disabled {
+  pointer-events: none;
+}
+
+.button-28:hover {
+  color: #fff;
+  background-color: #424242;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.button-28:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+/* ====================== */
+
+
+/* CSS */
+.admin,
+.admin:after {
+  width: 50px;
+  height: 25px;
+  line-height: 0px;
+  font-size: 12px;
+  font-family: Roboto,'Bebas Neue', sans-serif;
+  font-weight:  bold;
+  background: linear-gradient(45deg, transparent 5%, #eb6363 5%);
+  border: 0;
+  color: rgb(0, 0, 0);
+  /* letter-spacing: 3px; */
+  box-shadow: 4px 0px 0px #00929c;
+  outline: transparent;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.admin:after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  
+  content: 'ALTERNATE TEXT';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #eb6363 5%);
+  text-shadow: -3px -3px 0px #F8F005, 3px 3px 0px #00E6F6;
+  clip-path: var(--slice-0);
+}
+
+.admin:hover:after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}
+
+@media (min-width: 768px) {
+  .admin,
+  .admin:after {
+    width: 60px;
+    height: 25px;
+    /* line-height: 88px; */
+  }
+}

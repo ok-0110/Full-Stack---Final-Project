@@ -43,21 +43,27 @@ export default function Show(props) {
   };
 
   return (
-    <div style={{ border: "1px solid black", margin: "4px" }}>
-      <span>
-        {props.data.Name}, {date}
-      </span>{" "}
-      <br />
-      <span>{`Genres: "${props.data.Genres.join('", "')}" `}</span> <br />
-      <img src={props.data.Image} alt={`of ${props.data.Name}`} height="100" />
+    <div style={{ paddingLeft: "5px", border: "1px solid black", margin: "4px" }}>
+      <span className="fontBolder" style={{ fontSize: "17px" }}>
+        {props.data.Name} ,{" "}
+      </span>
+      <span> {date}</span> <br />
+      <span className="fontBold">Genres: </span>
+      <span>{`"${props.data.Genres.join('", "')}" `}</span> <br />
+      <img  class="itsImg" src={props.data.Image} alt={`of ${props.data.Name}`} height="100" />
       <SubscriptionsTOShow showId={props.data._id} />
-      <button onClick={edit} name="">
-        Edit
-      </button>{" "}
+      &nbsp;{" "}
+      <button onClick={edit} class="edit" role="button">
+        <span class="text">Edit</span>
+      </button>
       &nbsp; &nbsp;
-     {canDelete?<button onClick={deleteShow} name="">
-        Delete
-      </button>:null} 
+      {canDelete ? (
+        <button onClick={deleteShow} class="delete" role="button">
+          <span class="text">Delete</span>
+        </button>
+      ) : null}
+      <br />
+      <br />
     </div>
   );
 }

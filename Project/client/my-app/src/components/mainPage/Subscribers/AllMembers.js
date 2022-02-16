@@ -19,7 +19,6 @@ export default function AllMembers() {
   }, [reload]);
   return (
     <div>
-      All Members
       {allMembers}
     </div>
   );
