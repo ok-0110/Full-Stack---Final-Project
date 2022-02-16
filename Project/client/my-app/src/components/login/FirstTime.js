@@ -31,6 +31,19 @@ export default function FirstTime() {
         }); // /.,@#$%^&*()=-+ //
         setPasswordValid(isValid);
         break;
+
+      default:
+        break;
+    }
+    if (isValid) {
+      let user = { ...loggdUser };
+      user[e.target.name] = e.target.value;
+      setLoggdUser({ ...user });
+    }
+  };
+  const setUser2 = (e) => {
+    let isValid = true;
+    switch (e.target.name) {
       case "newPassword":
         isValid = validator.isAlphanumeric(e.target.value, "en-US", {
           ignore: ".,!@#$%^&*-+=_()/?'`;><[]{}|~",
@@ -45,16 +58,10 @@ export default function FirstTime() {
         break;
     }
     if (isValid) {
-      let user = { ...loggdUser };
+      let user = { ...newloggdUser };
       user[e.target.name] = e.target.value;
-      setLoggdUser({ ...user });
+      setNewLoggdUser({ ...user });
     }
-  };
-  const setUser2 = (e) => {
-    let user = { ...newloggdUser };
-
-    user[e.target.name] = e.target.value;
-    setNewLoggdUser({ ...user });
   };
 
   const verifyUser = async () => {
