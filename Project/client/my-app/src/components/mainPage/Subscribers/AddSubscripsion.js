@@ -7,10 +7,7 @@ export default function AddSubscripsion(props) {
   const [coretTime, setCoretTime] = useState([]);
 
   const [options, setOptions] = useState([]);
-  /**{
-      label: "Apple",
-      value: "apple",
-    } */
+  
 
   useEffect(() => {
     const getShows = async () => {

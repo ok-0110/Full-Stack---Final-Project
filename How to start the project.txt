@@ -1,0 +1,11 @@
+1. in project- for the dolders: (client/my-app , server's/Company server  , server's/Subscriptions server   )  open in Integrated Terminal -> npm i -> npm start 
+
+2. login - has admin 
+A: prass "Admin" button
+B: userName: admin , password: admin
+
+3. login - has Employee 
+A: admin need to set the employee in "Add User"  and give the userName And password (first the the password is "1234") 
+B: when log in for first time - employe need to change password (by click on"first tame?") 
+
+Bonus, I recommend using a browser size of 150%

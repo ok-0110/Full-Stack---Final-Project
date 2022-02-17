@@ -71,13 +71,15 @@ export default function MainPage() {
   );
   //=============================================start of return
   return (
-    <div style={{ maxWidth: "550px", border: "1px solid black", margin: "4px" }}>
+    <div style={{ maxWidth: "550px", border: "1px solid black", margin: "4px",margin:"auto"}}> {/* , textAlign:"center"  */}
+      {/* <div style={{backgroundColor:"white", position:"sticky",  top: "10px"}}> */}
       <h3>&nbsp;&nbsp;{`Hello ${nameOfUser}, Welcome back`}</h3>
       {isAdmin ? adminButtons : employeeButtons}
+
+      {/* </div> */}
       <br />
       <Routes>
         <Route path="*" element={null} />
-        {/* <Route path="/" element={null} /> */}
         <Route path="/manageusers/*" element={<ManageUsers />} />
         <Route path="/shows/*" element={<Shows />} />
         <Route path="/Subscribers/*" element={<Members />} />

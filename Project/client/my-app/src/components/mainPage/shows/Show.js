@@ -44,26 +44,39 @@ export default function Show(props) {
 
   return (
     <div style={{ paddingLeft: "5px", border: "1px solid black", margin: "4px" }}>
-      <span className="fontBolder" style={{ fontSize: "17px" }}>
-        {props.data.Name} ,{" "}
-      </span>
-      <span> {date}</span> <br />
-      <span className="fontBold">Genres: </span>
-      <span>{`"${props.data.Genres.join('", "')}" `}</span> <br />
-      <img  class="itsImg" src={props.data.Image} alt={`of ${props.data.Name}`} height="100" />
-      <SubscriptionsTOShow showId={props.data._id} />
-      &nbsp;{" "}
-      <button onClick={edit} class="edit" role="button">
-        <span class="text">Edit</span>
-      </button>
-      &nbsp; &nbsp;
-      {canDelete ? (
-        <button onClick={deleteShow} class="delete" role="button">
-          <span class="text">Delete</span>
-        </button>
-      ) : null}
-      <br />
-      <br />
+      <div style={{ padding: "10px", display: "flex" }}>
+        {" "}
+        {/* ,direction: "initial" */}
+        <img class="itsImg" src={props.data.Image} alt={`of ${props.data.Name}`} height="100" />
+        <div style={{ padding: "10px" }}>
+          <span className="fontBolder" style={{ fontSize: "17px" }}>
+            {props.data.Name} ,{" "}
+          </span>
+          <span> {date}</span> <br />
+          <br />
+          <span className="fontBold">Genres: </span>
+          <span>{`"${props.data.Genres.join('", "')}" `}</span> <br />
+        </div>
+      </div>
+      <div style={{ paddingLeft: "10px", display: "flex" }}>
+        <div>
+          <br />
+          <button onClick={edit} class="edit" role="button">
+            <span class="text">Edit</span>
+          </button>
+          &nbsp; &nbsp;
+          {canDelete ? (
+            <button onClick={deleteShow} class="delete" role="button">
+              <span class="text">Delete</span>
+            </button>
+          ) : null}
+        </div>
+        <div style={{ paddingLeft: "40px" }}>
+          {" "}
+          <SubscriptionsTOShow showId={props.data._id} />
+          &nbsp;{" "}
+        </div>
+      </div>
     </div>
   );
 }
